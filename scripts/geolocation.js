@@ -1,6 +1,4 @@
 var map;
-var currentLat;
-var currentLng;
 var initLat = 53.490009;
 var initLng = -2.261631;
 var squares = [];
@@ -50,8 +48,6 @@ function initialize() {
             [Math.floor(Math.abs(position.coords.latitude-initLat)*1000)]
             [Math.floor(Math.abs(position.coords.longitude-initLng)*500)]
             .fillOpacity=0.5;
-        console.log(Math.floor(Math.abs(position.coords.latitude-initLat)*1000));
-        console.log(Math.floor(Math.abs(position.coords.longitude-initLng)*500));
     });
 }
 

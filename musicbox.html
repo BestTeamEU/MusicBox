@@ -1,48 +1,109 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css">
         *{
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        #player {
-            height: 81px;
+        body>canvas {
+            position: absolute;
+            top: 80px;
+            left: 0;
+        }
+        body>header {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            height: 80px;
+            width: 100%;
             background: #1D2647;
             align-content: center;
             color: #ffffff;
+            line-height: 80px;
         }
-        #player>span {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 200px;
+        #playerBar {
+            width: 50%;
             text-align: center;
-            line-height: 81px;
+            margin: 0 auto;
+            display: block;
+        }
+        #playPauseButton,
+        #volumeDown,
+        #volumeUp {
+            width: 40px;
+            height: 40px;
+            background: #ffffff;
+            display: inline;
+            padding: 10px 15px;
+            font-size: 20px;
+            border-radius: 3px;
+        }
+        #playPauseButton:hover ,
+        #volumeDown:hover ,
+        #volumeUp:hover {
+            opacity: 0.7;
+        }
+        #songName {
+            color: #ffffff;
+            line-height: 80px;
+            display: inline-block;
+        }
+        #playPauseButton>span,
+        #volumeDown>span,
+        #volumeUp>span {
+            color: #000000;
         }
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
       <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
       <script src="scripts/geolocation.js"></script>
-      <script type="text/javascript">
-          soundcloud.addEventListener('onPlayerReady', function(player, data) {
-              player.api_play();
-          });
-
-      </script>
-
-      <script src="https://w.soundcloud.com/player/api.js"></script>
-      <script src="http://connect.soundcloud.com/sdk.js"></script>
   </head>
   <body>
-  <header id="player">
-      <object height="81" width="100%" id="yourPlayerId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-          <param onclick="api_load()" name="movie" value="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fteodor5121%2F100-kila-piqnata-toqga&enable_api=true&object_id=yourPlayerId">
-          <param name="allowscriptaccess" value="always">
-          <embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fteodor5121%2F100-kila-piqnata-toqga&enable_api=true&object_id=yourPlayerId" type="application/x-shockwave-flash" width="100%" name="yourPlayerId"></embed>
-      </object>
+  <header>
+      <div id="playerBar">
+          <div id="dz-root"></div>
+          <div id="player"></div>
+          <div id="songName"></div>
+          <script src="http://cdn-files.deezer.com/js/min/dz.js"></script>
+          <script>
+              DZ.init({
+                  appId  : 'MusicSquare',
+                  channelUrl : 'http://YOUR_DOMAIN/channel.html',
+                  player : {
+                      onload : function(){
+                          DZ.player.playAlbum(356532);
+    //                      var asd = DZ.player.getCurrentTrack().title;
+    //                      document.getElementById('songName').innerHTML = asd;
+                      }
+                  }
+              });
+              function playPauseSong() {
+                  if (DZ.player.isPlaying()) {
+                      DZ.player.pause();
+                      document.getElementById("playPauseButton").firstChild.className = "fa fa-play";
+                  }
+                  else {
+                      DZ.player.play();
+                      document.getElementById("playPauseButton").firstChild.className = "fa fa-pause";
+                  }
+              }
+              function volumeUp(){
+                  DZ.player.setVolume(DZ.player.getVolume()+10);
+              }
+              function volumeDown(){
+                  DZ.player.setVolume(DZ.player.getVolume()-10);
+              }
+
+          </script>
+          <div id="playPauseButton" onclick="playPauseSong()"><span class="fa fa-pause"></span></div>
+          <div id="volumeUp" onclick="volumeUp()"><span class="fa fa-volume-up"></span></div>
+          <div id="volumeDown" onclick="volumeDown()"><span class="fa fa-volume-down"></span></div>
+      </div>
   </header>
-<div id="map-canvas"></div>
+  <div id="map-canvas"></div>
   </body>
 </html>
