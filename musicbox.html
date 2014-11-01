@@ -98,11 +98,29 @@
                   DZ.player.setVolume(DZ.player.getVolume()-10);
               }
 
+              function movedQ(){
+                  navigator.geolocation.getCurrentPosition(function(position) {
+                      pos = new google.maps.LatLng(position.coords.latitude,
+                              position.coords.longitude);
+                      newSquareLat=Math.floor(Math.abs(position.coords.latitude-initLat)*1000);
+                      newSquareLng=Math.floor(Math.abs(position.coords.longtitude-initLng)*500);
+                  });
+                  if(!(newSquareLat==currentLat && newSquareLng==currentLng)){
+                      squares[currentLat][currentLng].fillOpacity=0.05;
+                      currentLat=newSquareLat;
+                      currentLng=newSquareLng;
+                      squares[currentLat][currentLng].fillOpacity=0.5;
+                      alert("new square!");
+                      return;
+                  }
+              }
+              window.setInterval(movedQ, 2000);
           </script>
           <div id="playPauseButton" onclick="playPauseSong()"><span class="fa fa-pause"></span></div>
           <div id="volumeUp" onclick="volumeUp()"><span class="fa fa-volume-up"></span></div>
           <div id="volumeDown" onclick="volumeDown()"><span class="fa fa-volume-down"></span></div>
       </div>
+      <a href="#">MOVE</a>
   </header>
   <div id="map-canvas"></div>
   </body>

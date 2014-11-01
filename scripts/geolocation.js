@@ -4,6 +4,10 @@ var initLng = -2.261631;
 var squares = [];
 var squaresRow = [];
 var pos;
+var currentLat;
+var currentLng;
+var newSquareLat;
+var newSquareLng;
 
 function initialize() {
     var mapOptions = {
@@ -29,6 +33,8 @@ function initialize() {
     for (var y = 0; y < 20; y++) {
         for (var x = 0; x < 20; x++) {
             squaresRow.push(new google.maps.Rectangle({
+                song: '43423342',
+
                 strokeColor: '#FF4400',
                 strokeOpacity: 0.4,
                 strokeWeight: 1,
@@ -48,6 +54,8 @@ function initialize() {
             [Math.floor(Math.abs(position.coords.latitude-initLat)*1000)]
             [Math.floor(Math.abs(position.coords.longitude-initLng)*500)]
             .fillOpacity=0.5;
+        currentLat=Math.floor(Math.abs(position.coords.latitude-initLat)*1000);
+        currentLng=Math.floor(Math.abs(position.coords.longitude-initLng)*500);
     });
 }
 
