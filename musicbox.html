@@ -8,7 +8,7 @@
             box-sizing: border-box;
         }
         #player {
-            height: 40px;
+            height: 81px;
             background: #1D2647;
             align-content: center;
             color: #ffffff;
@@ -19,17 +19,29 @@
             margin-right: auto;
             width: 200px;
             text-align: center;
-            line-height: 40px;
+            line-height: 81px;
         }
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
       <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
       <script src="scripts/geolocation.js"></script>
+      <script type="text/javascript">
+          soundcloud.addEventListener('onPlayerReady', function(player, data) {
+              player.api_play();
+          });
 
+      </script>
+
+      <script src="https://w.soundcloud.com/player/api.js"></script>
+      <script src="http://connect.soundcloud.com/sdk.js"></script>
   </head>
   <body>
   <header id="player">
-        <span>sadsadsadsa</span>
+      <object height="81" width="100%" id="yourPlayerId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+          <param onclick="api_load()" name="movie" value="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fteodor5121%2F100-kila-piqnata-toqga&enable_api=true&object_id=yourPlayerId">
+          <param name="allowscriptaccess" value="always">
+          <embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fteodor5121%2F100-kila-piqnata-toqga&enable_api=true&object_id=yourPlayerId" type="application/x-shockwave-flash" width="100%" name="yourPlayerId"></embed>
+      </object>
   </header>
 <div id="map-canvas"></div>
   </body>
