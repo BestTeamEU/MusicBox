@@ -2,24 +2,34 @@
 <html>
   <head>
     <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #player {
+            height: 40px;
+            background: #1D2647;
+            align-content: center;
+            color: #ffffff;
+        }
+        #player>span {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 200px;
+            text-align: center;
+            line-height: 40px;
+        }
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxhfWUIkvPGM_hOU-yBbvOEUYzRkFUtZM">
-    </script>
-    <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: { lat: -34.397, lng: 150.644},
-          zoom: 8
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+      <script src="scripts/geolocation.js"></script>
   </head>
   <body>
+  <div id="player">
+        <span>sadsadsadsa</span>
+  </div>
 <div id="map-canvas"></div>
   </body>
 </html>
